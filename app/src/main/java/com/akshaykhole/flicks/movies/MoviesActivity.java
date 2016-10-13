@@ -1,9 +1,11 @@
-package com.akshaykhole.flicks;
+package com.akshaykhole.flicks.movies;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.akshaykhole.flicks.R;
+
+public class MoviesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
