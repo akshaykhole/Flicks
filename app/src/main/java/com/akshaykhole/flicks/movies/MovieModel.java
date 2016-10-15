@@ -18,6 +18,12 @@ public class MovieModel {
     String originalTitle;
     String overview;
     String backdropPosterPath;
+    Integer vote_average;
+
+    public enum PopularityCategories {
+        POPULAR,
+        NOT_POPULAR
+    }
 
     public String getBackdropPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w500/%s", backdropPosterPath);
@@ -40,6 +46,7 @@ public class MovieModel {
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPosterPath = jsonObject.getString("backdrop_path");
+        this.vote_average = jsonObject.getInt("vote_average");
     }
 
     public static ArrayList<MovieModel> fromJSONArray(JSONArray array) {
@@ -54,5 +61,13 @@ public class MovieModel {
             }
         }
         return results;
+    }
+
+    public Integer popularityOrdinal() {
+        if (this.vote_average > 5) {
+            return PopularityCategories.POPULAR.ordinal();
+        } else {
+            return PopularityCategories.NOT_POPULAR.ordinal();
+        }
     }
 }
