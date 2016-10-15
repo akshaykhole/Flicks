@@ -1,6 +1,7 @@
 package com.akshaykhole.flicks.movies;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
