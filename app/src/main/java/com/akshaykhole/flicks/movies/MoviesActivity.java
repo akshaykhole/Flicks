@@ -45,6 +45,7 @@ public class MoviesActivity extends AppCompatActivity {
                 try {
                     movieJsonResults = response.getJSONArray("results");
                     movies.addAll(MovieModel.fromJSONArray(movieJsonResults));
+                    movieArrayAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
