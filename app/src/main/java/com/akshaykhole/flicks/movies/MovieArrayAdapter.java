@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akshaykhole.flicks.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
 
         tvTitle.setText(movie.getOriginalTitle());
         tvOverView.setText(movie.getOverview());
+
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
         return convertView;
     }
 }
