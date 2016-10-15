@@ -33,7 +33,7 @@ public class MoviesActivity extends AppCompatActivity {
         movieArrayAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieArrayAdapter);
 
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+        String url = getResources().getString(R.string.moviesDatabaseUrl);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new JsonHttpResponseHandler(){
