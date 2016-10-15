@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeContainerMoviesList"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.akshaykhole.flicks.movies.MoviesActivity">
-
+    android:layout_height="match_parent">
+    
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,4 +12,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/lvMovieItems"/>
-</RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
