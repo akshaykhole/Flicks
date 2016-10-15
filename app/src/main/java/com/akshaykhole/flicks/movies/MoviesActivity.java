@@ -1,5 +1,6 @@
 package com.akshaykhole.flicks.movies;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,9 @@ public class MoviesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MovieModel movie = movies.get(i);
+                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                intent.putExtra("movie", movie);
+                startActivity(intent);
             }
         });
     }
