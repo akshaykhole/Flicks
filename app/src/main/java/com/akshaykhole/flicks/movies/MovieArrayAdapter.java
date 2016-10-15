@@ -3,6 +3,7 @@ package com.akshaykhole.flicks.movies;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,16 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
         super(context, R.layout.movies_list_item, movies);
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return MovieModel.PopularityCategories.values().length;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return getItem(position).popularityOrdinal();
+    }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,14 +50,13 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
         int orientation = getContext().getResources().getConfiguration().orientation;
 
         if(convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.movies_list_item, parent, false);
+            int typeOfViewToInflate = getItemViewType(position);
+            convertView = getInflatedLayoutForType(typeOfViewToInflate);
 
             // Start caching using ViewHolder
             viewHolder = new ViewHolder();
             viewHolder.tvMovieTitle = (TextView) convertView.findViewById(R.id.textViewMovieTitle);
             viewHolder.tvMovieOverview = (TextView) convertView.findViewById(R.id.textViewMovieOverview);
-
 
             viewHolder.ivMovieImage = (ImageView) convertView.findViewById(R.id.imageViewMoviePoster);
             convertView.setTag(viewHolder);
@@ -54,8 +64,11 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvMovieTitle.setText(movie.getOriginalTitle());
-        viewHolder.tvMovieOverview.setText(movie.getOverview());
+        if(movie.popularityOrdinal() == MovieModel.PopularityCategories.NOT_POPULAR.ordinal()) {
+            viewHolder.tvMovieTitle.setText(movie.getOriginalTitle());
+            viewHolder.tvMovieOverview.setText(movie.getOverview());
+        }
+
 
         // TODO: Try to DRY this up
         if(orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -73,5 +86,15 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
         }
 
         return convertView;
+    }
+
+    private View getInflatedLayoutForType(int type) {
+        if(type == MovieModel.PopularityCategories.POPULAR.ordinal()) {
+            return LayoutInflater.from(getContext()).inflate(R.layout.popular_movie_list_item, null);
+        } else if (type == MovieModel.PopularityCategories.NOT_POPULAR.ordinal()) {
+            return LayoutInflater.from(getContext()).inflate(R.layout.movies_list_item, null);
+        } else {
+            return null;
+        }
     }
 }
