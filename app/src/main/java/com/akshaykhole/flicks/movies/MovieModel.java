@@ -17,6 +17,11 @@ public class MovieModel {
     String posterPath;
     String originalTitle;
     String overview;
+    String backdropPosterPath;
+
+    public String getBackdropPosterPath() {
+        return String.format("https://image.tmdb.org/t/p/w500/%s", backdropPosterPath);
+    }
 
     public String getOriginalTitle() {
         return originalTitle;
@@ -34,11 +39,14 @@ public class MovieModel {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.backdropPosterPath = jsonObject.getString("backdrop_path");
     }
 
     public static ArrayList<MovieModel> fromJSONArray(JSONArray array) {
         ArrayList<MovieModel> results = new ArrayList<>();
+
         for(int x = 0; x < array.length(); ++x) {
+
             try {
                 results.add(new MovieModel(array.getJSONObject(x)));
             } catch (JSONException e) {
