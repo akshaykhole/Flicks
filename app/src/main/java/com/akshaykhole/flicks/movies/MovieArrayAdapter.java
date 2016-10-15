@@ -1,6 +1,7 @@
 package com.akshaykhole.flicks.movies;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         MovieModel movie = getItem(position);
         ViewHolder viewHolder;
+        int orientation = getContext().getResources().getConfiguration().orientation;
 
         if(convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -45,6 +47,8 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
             viewHolder = new ViewHolder();
             viewHolder.tvMovieTitle = (TextView) convertView.findViewById(R.id.textViewMovieTitle);
             viewHolder.tvMovieOverview = (TextView) convertView.findViewById(R.id.textViewMovieOverview);
+
+
             viewHolder.ivMovieImage = (ImageView) convertView.findViewById(R.id.imageViewMoviePoster);
             convertView.setTag(viewHolder);
         } else {
@@ -53,7 +57,12 @@ public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
 
         viewHolder.tvMovieTitle.setText(movie.getOriginalTitle());
         viewHolder.tvMovieOverview.setText(movie.getOverview());
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivMovieImage);
+
+        if(orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivMovieImage);
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Picasso.with(getContext()).load(movie.getBackdropPosterPath()).into(viewHolder.ivMovieImage);
+        }
 
         return convertView;
     }
