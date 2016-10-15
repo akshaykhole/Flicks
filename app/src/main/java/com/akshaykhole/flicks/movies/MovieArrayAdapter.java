@@ -1,8 +1,8 @@
 package com.akshaykhole.flicks.movies;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,30 +20,41 @@ import java.util.List;
  */
 
 public class MovieArrayAdapter extends ArrayAdapter<MovieModel> {
+
+    private static class ViewHolder {
+        TextView tvMovieTitle;
+        TextView tvMovieOverview;
+        ImageView ivMovieImage;
+    }
+
     public MovieArrayAdapter(Context context, List<MovieModel> movies) {
-        super(context, android.R.layout.simple_list_item_1, movies);
+        super(context, R.layout.movies_list_item, movies);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MovieModel movie = getItem(position);
+        ViewHolder viewHolder;
 
         if(convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.movies_list_item, parent, false);
+
+            // Start caching using ViewHolder
+            viewHolder = new ViewHolder();
+            viewHolder.tvMovieTitle = (TextView) convertView.findViewById(R.id.textViewMovieTitle);
+            viewHolder.tvMovieOverview = (TextView) convertView.findViewById(R.id.textViewMovieOverview);
+            viewHolder.ivMovieImage = (ImageView) convertView.findViewById(R.id.imageViewMoviePoster);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView ivImage = (ImageView) convertView.findViewById(R.id.imageViewMoviePoster);
-        ivImage.setImageResource(0);
+        viewHolder.tvMovieTitle.setText(movie.getOriginalTitle());
+        viewHolder.tvMovieOverview.setText(movie.getOverview());
+        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivMovieImage);
 
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.textViewMovieTitle);
-        TextView tvOverView = (TextView) convertView.findViewById(R.id.textViewMovieOverview);
-
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverView.setText(movie.getOverview());
-
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
         return convertView;
     }
 }
