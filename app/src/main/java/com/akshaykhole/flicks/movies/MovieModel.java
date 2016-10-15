@@ -19,7 +19,7 @@ public class MovieModel implements Serializable {
     String originalTitle;
     String overview;
     String backdropPosterPath;
-    Integer vote_average;
+    Integer voteAverage;
 
     public enum PopularityCategories {
         POPULAR,
@@ -47,7 +47,7 @@ public class MovieModel implements Serializable {
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPosterPath = jsonObject.getString("backdrop_path");
-        this.vote_average = jsonObject.getInt("vote_average");
+        this.voteAverage = jsonObject.getInt("vote_average");
     }
 
     public static ArrayList<MovieModel> fromJSONArray(JSONArray array) {
@@ -65,7 +65,7 @@ public class MovieModel implements Serializable {
     }
 
     public Integer popularityOrdinal() {
-        if (this.vote_average > 5) {
+        if (this.voteAverage > 5) {
             return PopularityCategories.POPULAR.ordinal();
         } else {
             return PopularityCategories.NOT_POPULAR.ordinal();
