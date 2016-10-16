@@ -3,12 +3,16 @@ package com.akshaykhole.flicks.movies;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akshaykhole.flicks.R;
+import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieTitle;
+    ImageView ivMoviePoster;
+    TextView tvMovieOverview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +22,18 @@ public class MovieDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         MovieModel movie = (MovieModel) intent.getSerializableExtra("movie");
         tvMovieTitle.setText(movie.getOriginalTitle());
+        tvMovieOverview.setText(movie.getOverview());
+
+        Picasso.with(getApplicationContext())
+                .load(movie.getPosterPath())
+                .placeholder(R.drawable.placeholder_movie_image)
+                .error(R.drawable.placeholder_movie_image_error)
+                .into(this.ivMoviePoster);
     }
 
     public void initComponents() {
         this.tvMovieTitle = (TextView) findViewById(R.id.textViewMovieTitle);
+        this.ivMoviePoster = (ImageView) findViewById(R.id.imageViewMoviePoster);
+        this.tvMovieOverview = (TextView) findViewById(R.id.textViewMovieOverview);
     }
 }

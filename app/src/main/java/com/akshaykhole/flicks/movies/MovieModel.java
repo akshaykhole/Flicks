@@ -15,15 +15,41 @@ import java.util.ArrayList;
 
 // https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 public class MovieModel implements Serializable {
+    public enum PopularityCategories {
+        POPULAR,
+        NOT_POPULAR
+    }
+
     String posterPath;
     String originalTitle;
     String overview;
     String backdropPosterPath;
-    Integer voteAverage;
+    String language;
+    String releaseDate;
+    Double voteAverage;
+    Double popularity;
 
-    public enum PopularityCategories {
-        POPULAR,
-        NOT_POPULAR
+    Boolean isVideo;
+    Boolean isAnAdultMovie;
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public Double getPopularity() {
+        return popularity;
+    }
+
+    public Boolean getVideo() {
+        return isVideo;
+    }
+
+    public Boolean getAnAdultMovie() {
+        return isAnAdultMovie;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
     public String getBackdropPosterPath() {
@@ -47,7 +73,11 @@ public class MovieModel implements Serializable {
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPosterPath = jsonObject.getString("backdrop_path");
-        this.voteAverage = jsonObject.getInt("vote_average");
+        this.voteAverage = jsonObject.getDouble("vote_average");
+        this.isVideo = jsonObject.getBoolean("video");
+        this.isAnAdultMovie = jsonObject.getBoolean("adult");
+        this.releaseDate = jsonObject.getString("release_date");
+        this.language = jsonObject.getString("original_language");
     }
 
     public static ArrayList<MovieModel> fromJSONArray(JSONArray array) {
