@@ -32,7 +32,8 @@
             android:layout_below="@+id/imageViewMoviePoster"
             android:id="@+id/ratingBarMovieRating"
             android:numStars="@integer/ratingBarMovieRatingMax"
-            android:rating="0"/>
+            android:rating="0"
+            android:isIndicator="true" />
 
         <TextView
             android:text="TextView"
