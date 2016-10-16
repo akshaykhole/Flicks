@@ -39,7 +39,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .error(R.drawable.placeholder_movie_image_error)
                 .into(this.ivMoviePoster);
 
-        ratingBarMovieRating.setRating(movie.voteAverage.floatValue());
+        ratingBarMovieRating.setRating((movie.voteAverage.floatValue() / 2));
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
