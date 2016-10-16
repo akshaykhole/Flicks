@@ -1,9 +1,9 @@
 package com.akshaykhole.flicks.movies;
 
 import android.content.Intent;
-import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.akshaykhole.flicks.R;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieTitle;
@@ -37,7 +40,16 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(this.ivMoviePoster);
 
         ratingBarMovieRating.setRating(movie.voteAverage.floatValue());
-        textViewReleaseDate.setText(movie.getReleaseDate());
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date releaseDate = dateFormat.parse(movie.getReleaseDate());
+            dateFormat = new SimpleDateFormat("MMM d, yyyy");
+            String formattedDate = dateFormat.format(releaseDate);
+            textViewReleaseDate.setText(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initComponents() {
