@@ -4,16 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.akshaykhole.flicks.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -22,6 +31,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieOverview;
     RatingBar ratingBarMovieRating;
     TextView textViewReleaseDate;
+    MovieModel movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +39,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
         initComponents();
         Intent intent = getIntent();
-        MovieModel movie = (MovieModel) intent.getSerializableExtra("movie");
+        this.movie = (MovieModel) intent.getSerializableExtra("movie");
         tvMovieTitle.setText(movie.getOriginalTitle());
         tvMovieOverview.setText(movie.getOverview());
 
@@ -50,6 +60,54 @@ public class MovieDetailActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        ivMoviePoster.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AsyncHttpClient videoTrailerClient = new AsyncHttpClient();
+
+                String trailersUrl = "https://api.themoviedb.org/3/movie/" +
+                        movie.getId() + "/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+
+                videoTrailerClient.get(trailersUrl, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode,
+                                          Header[] headers,
+                                          JSONObject response) {
+
+                        super.onSuccess(statusCode, headers, response);
+
+                        try {
+                            JSONArray videoList = response.getJSONArray("results");
+                            if(videoList.length() > 0) {
+
+                                Intent playVideoIntent = new Intent(MovieDetailActivity.this,
+                                        MovieVideoPlayerActivity.class);
+
+                                String videoKey = videoList.getJSONObject(0).get("key").toString();
+
+                                playVideoIntent.putExtra("videoKey", videoKey);
+
+                                startActivity(playVideoIntent);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode,
+                                          Header[] headers,
+                                          String responseString,
+                                          Throwable throwable) {
+
+                        super.onFailure(statusCode, headers, responseString, throwable);
+
+                        Log.d("DEBUG", responseString);
+                    }
+                });
+            }
+        });
     }
 
     public void initComponents() {

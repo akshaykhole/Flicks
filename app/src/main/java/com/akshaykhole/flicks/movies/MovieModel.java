@@ -1,6 +1,12 @@
 package com.akshaykhole.flicks.movies;
 
+import android.content.Intent;
 import android.graphics.Movie;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,12 +15,14 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  * Created by akshay on 10/15/16.
  */
 
-// https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 public class MovieModel implements Serializable {
+
     public enum PopularityCategories {
         POPULAR,
         NOT_POPULAR
@@ -26,11 +34,12 @@ public class MovieModel implements Serializable {
     String backdropPosterPath;
     String language;
     String releaseDate;
+    Integer id;
     Double voteAverage;
     Double popularity;
-
-    Boolean isVideo;
     Boolean isAnAdultMovie;
+
+    public Integer getId() { return id; }
 
     public String getReleaseDate() {
         return releaseDate;
@@ -38,10 +47,6 @@ public class MovieModel implements Serializable {
 
     public Double getPopularity() {
         return popularity;
-    }
-
-    public Boolean getVideo() {
-        return isVideo;
     }
 
     public Boolean getAnAdultMovie() {
@@ -69,12 +74,12 @@ public class MovieModel implements Serializable {
     }
 
     public MovieModel(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPosterPath = jsonObject.getString("backdrop_path");
         this.voteAverage = jsonObject.getDouble("vote_average");
-        this.isVideo = jsonObject.getBoolean("video");
         this.isAnAdultMovie = jsonObject.getBoolean("adult");
         this.releaseDate = jsonObject.getString("release_date");
         this.language = jsonObject.getString("original_language");

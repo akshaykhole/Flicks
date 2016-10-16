@@ -8,17 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.akshaykhole.flicks.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import cz.msebera.android.httpclient.Header;
 
 public class MoviesActivity extends AppCompatActivity {
@@ -55,9 +51,56 @@ public class MoviesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MovieModel movie = movies.get(i);
-                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
-                intent.putExtra("movie", movie);
-                startActivity(intent);
+
+                if(movie.popularityOrdinal() == MovieModel.PopularityCategories.POPULAR.ordinal()) {
+                    AsyncHttpClient videoTrailerClient = new AsyncHttpClient();
+
+                    String trailersUrl = "https://api.themoviedb.org/3/movie/" +
+                            movie.getId() + "/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+
+                    videoTrailerClient.get(trailersUrl, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode,
+                                              Header[] headers,
+                                              JSONObject response) {
+
+                            super.onSuccess(statusCode, headers, response);
+
+                            try {
+                                JSONArray videoList = response.getJSONArray("results");
+                                if(videoList.length() > 0) {
+
+                                    Intent playVideoIntent = new Intent(MoviesActivity.this,
+                                            MovieVideoPlayerActivity.class);
+
+                                    String videoKey = videoList.getJSONObject(0).get("key").toString();
+
+                                    playVideoIntent.putExtra("videoKey", videoKey);
+
+                                    startActivity(playVideoIntent);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode,
+                                              Header[] headers,
+                                              String responseString,
+                                              Throwable throwable) {
+
+                            super.onFailure(statusCode, headers, responseString, throwable);
+
+                            Log.d("DEBUG", responseString);
+                        }
+                    });
+
+                } else {
+                    Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                    intent.putExtra("movie", movie);
+                    startActivity(intent);
+                }
             }
         });
     }
