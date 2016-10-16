@@ -11,11 +11,14 @@ import android.widget.TextView;
 import com.akshaykhole.flicks.R;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieTitle;
     ImageView ivMoviePoster;
     TextView tvMovieOverview;
     RatingBar ratingBarMovieRating;
+    TextView textViewReleaseDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(this.ivMoviePoster);
 
         ratingBarMovieRating.setRating(movie.voteAverage.floatValue());
+        textViewReleaseDate.setText(movie.getReleaseDate());
     }
 
     public void initComponents() {
@@ -41,5 +45,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         this.ivMoviePoster = (ImageView) findViewById(R.id.imageViewMoviePoster);
         this.tvMovieOverview = (TextView) findViewById(R.id.textViewMovieOverview);
         this.ratingBarMovieRating = (RatingBar) findViewById(R.id.ratingBarMovieRating);
+        this.textViewReleaseDate = (TextView) findViewById(R.id.textViewReleaseDate);
     }
 }

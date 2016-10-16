@@ -37,5 +37,27 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewMovieOverview"
             android:layout_below="@+id/ratingBarMovieRating" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageViewMoviePoster"
+            android:layout_toRightOf="@+id/ratingBarMovieRating" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewReleaseText"
+                android:text="In Theatres:"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewReleaseDate"
+                android:text="2016-03-12"
+                android:layout_below="@+id/textViewReleaseText"
+                android:textSize="18sp"/>
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>
