@@ -24,7 +24,7 @@
             android:id="@+id/imageViewMoviePoster" />
 
         <RatingBar
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageViewMoviePoster"
             android:id="@+id/ratingBarMovieRating"
