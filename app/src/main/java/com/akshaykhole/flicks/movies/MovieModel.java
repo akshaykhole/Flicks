@@ -5,6 +5,7 @@ import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.akshaykhole.flicks.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
