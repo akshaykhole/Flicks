@@ -17,8 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMovieTitle"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorTextTitleLight"
+            android:paddingBottom="@dimen/padding_small"/>
 
         <FrameLayout
             android:id="@+id/frame_layout_popular_movie"
@@ -52,13 +53,6 @@
             android:rating="0"
             android:isIndicator="true" />
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMovieOverview"
-            android:layout_below="@+id/ratingBarMovieRating" />
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewReleaseText"
                 android:text="In Theatres,"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,5 +75,12 @@
                 android:layout_below="@+id/textViewReleaseText"
                 android:textSize="18sp"/>
         </RelativeLayout>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewMovieOverview"
+            android:layout_below="@+id/ratingBarMovieRating" />
     </RelativeLayout>
 </ScrollView>
