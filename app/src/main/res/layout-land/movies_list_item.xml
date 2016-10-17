@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/movies_list_item_port">
+    android:id="@+id/movies_list_item_port"
+    android:padding="@dimen/padding_small">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -14,17 +15,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/imageViewMoviePoster" />
+        android:id="@+id/imageViewMoviePoster"
+        android:paddingRight="@dimen/padding_small"/>
 
     <TextView
-        android:text="Captain America: Civil War"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageViewMoviePoster"
         android:layout_toRightOf="@+id/imageViewMoviePoster"
         android:layout_toEndOf="@+id/imageViewMoviePoster"
         android:id="@+id/textViewMovieTitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorTextTitleLight"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,5 +35,6 @@
         android:layout_toRightOf="@+id/imageViewMoviePoster"
         android:layout_alignLeft="@+id/textViewMovieTitle"
         android:layout_alignStart="@+id/textViewMovieTitle"
-        android:id="@+id/textViewMovieOverview" />
+        android:id="@+id/textViewMovieOverview"
+        android:textColor="@color/colorTextLight"/>
 </RelativeLayout>

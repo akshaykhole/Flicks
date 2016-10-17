@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="10dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewMovieTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorTextTitleLight"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"/>
+
+        <FrameLayout
+            android:id="@+id/frame_layout_popular_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textViewMovieTitle">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_view_medium"
+                app:srcCompat="@drawable/placeholder_movie_image"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/imageViewMoviePoster"
+                android:alpha="0.8"/>
+
+            <ImageView
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/youtube_play_icon"
+                android:id="@+id/imageViewMoviePosterOverlayImage"
+                android:layout_gravity="center"
+                android:background="@drawable/youtube_play_icon"
+                android:alpha="0.8"
+                android:layout_width="130dp"/>
+
+        </FrameLayout>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frame_layout_popular_movie"
+            android:id="@+id/ratingBarMovieRating"
+            android:numStars="@integer/ratingBarMovieRatingMax"
+            android:rating="0"
+            android:isIndicator="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frame_layout_popular_movie"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewReleaseText"
+                android:text="In Theatres,"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewReleaseDate"
+                android:text="2016-03-12"
+                android:layout_below="@+id/textViewReleaseText"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewMovieOverview"
+            android:layout_below="@+id/ratingBarMovieRating" />
+    </RelativeLayout>
+</ScrollView>
