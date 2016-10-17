@@ -23,7 +23,8 @@
         <FrameLayout
             android:id="@+id/frame_layout_popular_movie"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textViewMovieTitle">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_view_medium"
