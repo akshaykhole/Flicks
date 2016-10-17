@@ -30,7 +30,6 @@ public class MoviesActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_movies);
         fetchMoviesAsync();
-
         swipeRefreshMoviesListContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainerMoviesList);
         swipeRefreshMoviesListContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,6 +105,7 @@ public class MoviesActivity extends AppCompatActivity {
     }
 
     public void fetchMoviesAsync() {
+        // TODO: Refactor this string into a 'Constants' class
         String url = getResources().getString(R.string.moviesDatabaseUrl);
         movies = new ArrayList<>();
         lvItems = (ListView) findViewById(R.id.lvMovieItems);
