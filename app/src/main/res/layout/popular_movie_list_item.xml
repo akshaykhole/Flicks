@@ -9,7 +9,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="@dimen/image_view_medium"
         app:srcCompat="@drawable/placeholder_movie_image"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
