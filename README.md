@@ -47,7 +47,8 @@ GIF created using  [LiceCap](http://www.cockos.com/licecap/) and
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Please excuse the video quality. It appears broken and then becomes clear.
+Using a 8-inch tablet device for the demo.
 
 ## Open-source libraries used
 
