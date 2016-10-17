@@ -4,11 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/popular_movie_list_item">
+    android:id="@+id/popular_movie_list_item"
+    android:padding="@dimen/movies_list_item_rl_padding">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         app:srcCompat="@drawable/placeholder_movie_image"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
