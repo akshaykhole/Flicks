@@ -84,6 +84,7 @@ public class MovieModel implements Serializable {
         this.isAnAdultMovie = jsonObject.getBoolean("adult");
         this.releaseDate = jsonObject.getString("release_date");
         this.language = jsonObject.getString("original_language");
+        this.popularity = jsonObject.getDouble("popularity");
     }
 
     public static ArrayList<MovieModel> fromJSONArray(JSONArray array) {

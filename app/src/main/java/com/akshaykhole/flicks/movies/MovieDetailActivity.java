@@ -43,7 +43,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
         initComponents();
 
-        tvMovieTitle.setText(movie.getOriginalTitle());
+        String movieTitle = movie.getOriginalTitle() +
+                " (" + String.format("%.2f", movie.getPopularity()) + "% popular)";
+        tvMovieTitle.setText(movieTitle);
         tvMovieOverview.setText(movie.getOverview());
 
         Picasso.with(getApplicationContext())
