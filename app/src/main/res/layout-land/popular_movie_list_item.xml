@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/popular_movie_list_item"
-    android:padding="@dimen/movies_list_item_rl_padding">
+    android:padding="@dimen/padding_small">
 
     <ImageView
         android:layout_width="match_parent"

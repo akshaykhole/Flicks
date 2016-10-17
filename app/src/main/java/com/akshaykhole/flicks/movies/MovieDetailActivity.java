@@ -23,9 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
 public class MovieDetailActivity extends AppCompatActivity {
+    Integer IMAGE_RADIUS = 15;
+    Integer IMAGE_MARGIN = 0;
+
     TextView tvMovieTitle;
     ImageView ivMoviePoster;
     TextView tvMovieOverview;
@@ -46,6 +50,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         Picasso.with(getApplicationContext())
                 .load(movie.getPosterPath())
                 .placeholder(R.drawable.placeholder_movie_image)
+                .fit()
+                .transform(new RoundedCornersTransformation(IMAGE_RADIUS, IMAGE_MARGIN))
                 .error(R.drawable.placeholder_movie_image_error)
                 .into(this.ivMoviePoster);
 
