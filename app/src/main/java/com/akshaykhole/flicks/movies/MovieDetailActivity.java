@@ -42,8 +42,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initComponents();
-        Intent intent = getIntent();
-        this.movie = (MovieModel) intent.getSerializableExtra("movie");
+
         tvMovieTitle.setText(movie.getOriginalTitle());
         tvMovieOverview.setText(movie.getOverview());
 
@@ -122,5 +121,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         this.tvMovieOverview = (TextView) findViewById(R.id.textViewMovieOverview);
         this.ratingBarMovieRating = (RatingBar) findViewById(R.id.ratingBarMovieRating);
         this.textViewReleaseDate = (TextView) findViewById(R.id.textViewReleaseDate);
+        Intent intent = getIntent();
+        this.movie = (MovieModel) intent.getSerializableExtra("movie");
     }
 }
