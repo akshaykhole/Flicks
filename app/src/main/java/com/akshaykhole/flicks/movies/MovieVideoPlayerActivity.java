@@ -25,7 +25,7 @@ public class MovieVideoPlayerActivity extends YouTubeBaseActivity {
                                                         YouTubePlayer youTubePlayer, boolean b) {
                         String videoKey = getIntent().getStringExtra("videoKey");
 
-                        youTubePlayer.cueVideo(videoKey);
+                        youTubePlayer.loadVideo(videoKey);
                     }
                     @Override
                     public void onInitializationFailure(YouTubePlayer.Provider provider,
