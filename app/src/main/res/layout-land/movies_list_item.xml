@@ -25,7 +25,8 @@
         android:layout_toRightOf="@+id/imageViewMoviePoster"
         android:layout_toEndOf="@+id/imageViewMoviePoster"
         android:id="@+id/textViewMovieTitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorTextTitleLight"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,5 +35,6 @@
         android:layout_toRightOf="@+id/imageViewMoviePoster"
         android:layout_alignLeft="@+id/textViewMovieTitle"
         android:layout_alignStart="@+id/textViewMovieTitle"
-        android:id="@+id/textViewMovieOverview" />
+        android:id="@+id/textViewMovieOverview"
+        android:textColor="@color/colorTextLight"/>
 </RelativeLayout>
